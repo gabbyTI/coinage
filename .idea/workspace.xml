@@ -31,9 +31,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="944402c1-1961-4806-916a-d9087040a488" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/coinage.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/coinage.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WalletController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WalletController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/design/js/custom/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/design/js/custom/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/buy/buy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/buy/buy.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/design/js/custom/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/design/js/custom/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/wallets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wallets/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/wallets/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/wallets/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +211,7 @@
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/composer.json" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="show.migrate.to.gradle.popup" value="false" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
@@ -263,7 +268,8 @@
       <workItem from="1624625261223" duration="10546000" />
       <workItem from="1624931889949" duration="101000" />
       <workItem from="1624938783271" duration="2310000" />
-      <workItem from="1625100137104" duration="2328000" />
+      <workItem from="1625100137104" duration="3113000" />
+      <workItem from="1634670392467" duration="7029000" />
     </task>
     <servers />
   </component>

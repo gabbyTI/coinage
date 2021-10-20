@@ -1,3 +1,4 @@
+// TODO: Code Refactoring
 /**
  * i - Variable Declarations
  *
@@ -351,7 +352,7 @@ if (localStorage.getItem('phone-otp-send-wait-count-' + user_id) !== null && loc
 		$(phone_otp_btn).prop({disabled: false});
 }
 
-if (urlLocation.pathname === '/offers' || urlLocation.pathname === '/offers/')
+if ($(view_offer).length)
 	$(view_offer).each(function (idx, val) {
 		let target = this,
 			_percentage = $(val).data('percent'),
@@ -363,6 +364,17 @@ if (urlLocation.pathname === '/offers' || urlLocation.pathname === '/offers/')
 		});
 		currentCryptoOffer(target, _crypto_type, _percentage);
 	});
+
+// TODO: Changes made here****
+$('.current-crypto-value').each(function (idx, val) {
+	let target = this,
+		_crypto_type = $('.amount > .currency-btc', target).html(),
+		_wallet_bal = $('.amount > .final-balance', target).html();
+	selectCryptoOffer(_crypto_type, function () {
+		let _price_val = price * _wallet_bal;
+		$('.amount-sm > .total', target).text(accounting.formatMoney(_price_val, '₦').toString());
+	});
+});
 
 // Logout of the Application on Logout click
 $('.logout').on('click', function (e) {

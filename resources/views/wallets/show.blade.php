@@ -47,10 +47,9 @@
 				<div class="nk-wg1-group g-2">
 					<div class="nk-wg1-item mr-xl-4">
 						<div class="nk-wg1-title text-soft">Available Balance</div>
-						<div class="nk-wg1-amount">
-							<div class="amount">{{$wallet->getWallet('final_balance')}} <small class="currency currency-usd">{{$wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type)}}</small></div>
-							<div class="amount-sm">Balance in <span>2.010550 <span
-										class="currency currency-ngn">NGN</span></span></div>
+						<div class="nk-wg1-amount current-crypto-value">
+							<div class="amount"><span class="final-balance">{{ $wallet->getWallet('final_balance') }}</span> <small class="currency currency-usd">{{$wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type)}}</small></div>
+							<div class="amount-sm">Balance in <span class="total">2.010550</span> <span class="currency currency-ngn">NGN</span></div>
 						</div>
 					</div>
 				</div>
@@ -76,10 +75,10 @@
 							<h6 class="title overline-title">Total Sent</h6>
 						</div>
 						<div class="nk-wg5-text">
-							<div class="nk-wg5-amount">
-								<div class="amount"> {{$wallet->getWallet('total_sent')}} <span class="currency currency-btc">{{$wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type)}}</span>
+							<div class="nk-wg5-amount current-crypto-value">
+								<div class="amount"><span class="final-balance">{{$wallet->getWallet('total_sent')}}</span> <span class="currency currency-btc">{{$wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type)}}</span>
 								</div>
-								<div class="amount-sm"> 972,360.72 <span class="currency currency-usd">NGN</span>
+								<div class="amount-sm"><span class="total"></span> <span class="currency currency-usd">NGN</span>
 								</div>
 							</div>
 						</div>
@@ -98,10 +97,10 @@
 							<h6 class="title overline-title">Total Receive</h6>
 						</div>
 						<div class="nk-wg5-text">
-							<div class="nk-wg5-amount">
+							<div class="nk-wg5-amount current-crypto-value">
 								<div class="amount"> {{$wallet->getWallet('total_received')}} <span class="currency currency-btc">{{$wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type)}}</span>
 								</div>
-								<div class="amount-sm"> 972,360.72 <span class="currency currency-usd">NGN</span>
+								<div class="amount-sm"><span class="total"></span> <span class="currency currency-usd">NGN</span>
 								</div>
 							</div>
 						</div>

@@ -1,3 +1,4 @@
+// TODO: Code Refactoring
 $(function () {
 	/**
 	 * 1. - Create Offer Functions

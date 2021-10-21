@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
+	private $status = 300;
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -112,6 +113,26 @@ class WalletController extends Controller
 	public function show(Wallet $wallet)
 	{
 		return view('wallets.show', compact('wallet', $wallet));
+	}
+
+	public function getWalletBalance(Wallet $wallet, Address $address)
+	{
+		$response = [];
+		$cryptoProcessingWalletApi = new CryptoProcessingApi();
+
+		$addressResponse = $cryptoProcessingWalletApi->callApi('get', '/wallets' . '/' . $wallet->wallet_id_string . '/addresses' . '/' . $address->address, null);
+
+		if ($addressResponse->error) {
+			$response['error'] = true;
+			$response['balance'] = '0.00000000';
+		} else {
+			$response['error'] = false;
+			$response['balance'] = number_format($addressResponse->apiData->data->final_balance, 8);
+			$this->status = 200;
+		}
+
+
+		return response($response, $this->status);
 	}
 
 	/**

@@ -59,7 +59,7 @@
 			<ul class="nk-block-tools gx-3">
 				<li class="btn-wrap"><a href="#" class="btn btn-icon btn-xl btn-dim btn-outline-light"><em
 							class="icon ni ni-arrow-up-right"></em></a><span class="btn-extext">Send</span></li>
-				<li class="btn-wrap"><a href="#" class="btn btn-icon btn-xl btn-dim btn-outline-light" type="button" data-toggle="modal" data-target="#modalDefault"><em
+				<li class="btn-wrap"><a href="#" class="btn btn-icon btn-xl btn-dim btn-outline-light" type="button" data-toggle="modal" data-target="#showAddressModal"><em
 							class="icon ni ni-arrow-down-left"></em></a><span class="btn-extext">Receive</span></li>
 			</ul>
 		</div><!-- .nk-block-content -->
@@ -155,7 +155,7 @@
 </div><!-- .nk-block --> --}}
 
 <!-- Modal Content Code -->
-<div class="modal fade" tabindex="-1" id="modalDefault">
+<div class="modal fade" tabindex="-1" id="showAddressModal">
     <div class="modal-dialog modal-dialog-top" role="document">
         <div class="modal-content">
             <a href="#" class="close" data-dismiss="modal" aria-label="Close">

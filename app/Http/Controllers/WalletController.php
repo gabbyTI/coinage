@@ -59,7 +59,7 @@ class WalletController extends Controller
 		// check if user has wallet type already
 		$user = auth()->user();
 		$crpyo_exists = $user->wallets->where('crypto_type', $request->crypto_type)->first();
-		if ($crpyo_exists) return redirect(route('wallets.create'))->with('message', "You already have a " . strtoupper($request->crypto_type) . " wallet");
+		if ($crpyo_exists) return redirect(route('wallets.index'))->with('message', "You already have a " . strtoupper($request->crypto_type) . " wallet");
 
 		$cryptoProcessingWalletApi = new CryptoProcessingApi();
 
@@ -100,7 +100,7 @@ class WalletController extends Controller
 
 			return redirect('/wallets');
 		} else {
-			return redirect(route('wallets.create'))->with('message', $response->message);
+			return redirect(route('wallets.index'))->with('message', $response->message);
 		}
 	}
 

@@ -49,8 +49,10 @@
 							<h5 class="nk-wgw-title title">Naira Account</h5>
 						</a>
 						<div class="nk-wgw-balance">
-							<div class="amount">{{auth()->user()->getFiatWalletbalance('ngn')}}<span
-									class="currency currency-ngn">NGN</span></div>
+							<div class="amount">
+								{{auth()->user()->getFiatWalletbalance('ngn')}}
+								<span class="currency currency-ngn">NGN</span>
+							</div>
 						</div>
 					</div>
 					<div class="nk-wgw-actions">
@@ -129,103 +131,202 @@
 	</div><!-- .row -->
 </div><!-- .nk-block -->
 
-<div class="nk-block">
-	<div class="nk-block-head-sm">
-		<div class="nk-block-head-content">
-			<h5 class="nk-block-title title">Crypto Accounts</h5>
+	<div class="nk-block">
+		<div class="nk-block-head-sm">
+			<div class="nk-block-head-content">
+				<h5 class="nk-block-title title">Crypto Accounts</h5>
+			</div>
 		</div>
-	</div>
-	<div class="row g-gs">
+		@if (session('message'))
+		<div class="center mb-3">
+			<div class="alert col-md-4 center alert-danger alert-dismissible">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
+				<strong><i class="bi bi-thumbs-up"></i></strong> {{session('message')}}
+			</div>
+		</div>
+		@endif
+		<div class="row g-gs">
 
-		@foreach ($wallets as $wallet )
-		<div class="col-md-6 col-lg-4 view-wallet">
-			<input type="text" class="wallet-id" value="{{$wallet->id}}" hidden>
-			<input type="text" class="address-id" value="{{$wallet->address->id}}" hidden>
-			<div class="card card-bordered">
-				<div class="nk-wgw">
-					<div class="nk-wgw-inner">
-						<a class="nk-wgw-name" href="{{route('wallets.show',$wallet->id)}}">
-							<div class="nk-wgw-icon">
-								<em
-									class="icon ni ni-sign-{{$wallet->crypto_type == 'usdteth'?'usdt' : $wallet->crypto_type}}"></em>
-							</div>
-							@switch($wallet->crypto_type)
-							@case('btc')
-							<h5 class="nk-wgw-title title">Bitcoin Wallet</h5>
-							@break
-							@case('eth')
-							<h5 class="nk-wgw-title title">Ethereum Wallet</h5>
-							@break
-							@case('usdteth')
-							<h5 class="nk-wgw-title title">USD Tether Wallet</h5>
-							@break
-							@default
-							@endswitch
-						</a>
-						<div class="nk-wgw-balance current-crypto-value">
-							<div class="amount">
-								<span class="final-balance"><img src="{{asset('design/img/ajax-loader.gif')}}" class="loaderImage" alt="loading"></span>
+			@foreach ($wallets as $wallet )
+				<div class="col-md-6 col-lg-4 view-wallet">
+					<input type="text" class="wallet-id" value="{{$wallet->id}}" hidden>
+					<input type="text" class="address-id" value="{{$wallet->address->id}}" hidden>
+					<div class="card card-bordered">
+						<div class="nk-wgw">
+							<div class="nk-wgw-inner">
+								<a class="nk-wgw-name" href="{{route('wallets.show',$wallet->id)}}">
+									<div class="nk-wgw-icon">
+										<em
+											class="icon ni ni-sign-{{$wallet->crypto_type == 'usdteth'?'usdt' : $wallet->crypto_type}}"></em>
+									</div>
+									@switch($wallet->crypto_type)
+									@case('btc')
+									<h5 class="nk-wgw-title title">Bitcoin Wallet</h5>
+									@break
+									@case('eth')
+									<h5 class="nk-wgw-title title">Ethereum Wallet</h5>
+									@break
+									@case('usdteth')
+									<h5 class="nk-wgw-title title">USD Tether Wallet</h5>
+									@break
+									@default
+									@endswitch
+								</a>
+								<div class="nk-wgw-balance current-crypto-value">
+									<div class="amount">
+										<span class="final-balance"><img src="{{asset('design/img/ajax-loader.gif')}}"
+												class="loaderImage" alt="loading"></span>
 
-								<span class="currency currency-btc">{{ $wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type) }}</span>
+										<span
+											class="currency currency-btc">{{ $wallet->crypto_type == 'usdteth'?'USDT' : strtoupper($wallet->crypto_type) }}</span>
+									</div>
+									<div class="amount-sm"><span class="total"></span> <span
+											class="currency currency-usd">NGN</span></div>
+								</div>
 							</div>
-							<div class="amount-sm"><span class="total"></span> <span
-									class="currency currency-usd">NGN</span></div>
+							<div class="nk-wgw-actions">
+								<ul>
+									<li><a href="#"><em class="icon ni ni-arrow-up-right"></em> <span>Send</span></a></li>
+									<li><a href="#" type="button" data-toggle="modal"
+											data-target="#showAddressModal-{{$wallet->id}}"><em
+												class="icon ni ni-arrow-down-left"></em><span>Receive</span></a></li>
+									<li><a href="#"><em class="icon ni ni-arrow-to-right"></em><span>Withdraw</span></a></li>
+								</ul>
+							</div>
+							<div class="nk-wgw-more dropdown">
+								<a href="#" class="btn btn-icon btn-trigger" data-toggle="dropdown"><em
+										class="icon ni ni-more-h"></em></a>
+								<div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+									<ul class="link-list-plain sm">
+										<li><a href="{{route('wallets.show',$wallet->id)}}">Details</a></li>
+										{{-- <li><a href="#">Edit</a></li>
+												<li><a href="#">Delete</a></li>
+												<li><a href="#">Make Default</a></li> --}}
+									</ul>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="nk-wgw-actions">
-						<ul>
-							<li><a href="#"><em class="icon ni ni-arrow-up-right"></em> <span>Send</span></a></li>
-							<li><a href="#"><em class="icon ni ni-arrow-down-left"></em><span>Receive</span></a></li>
-							<li><a href="#"><em class="icon ni ni-arrow-to-right"></em><span>Withdraw</span></a></li>
-						</ul>
-					</div>
-					<div class="nk-wgw-more dropdown">
-						<a href="#" class="btn btn-icon btn-trigger" data-toggle="dropdown"><em
-								class="icon ni ni-more-h"></em></a>
-						<div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-							<ul class="link-list-plain sm">
-								<li><a href="{{route('wallets.show',$wallet->id)}}">Details</a></li>
-								{{-- <li><a href="#">Edit</a></li>
-										<li><a href="#">Delete</a></li>
-										<li><a href="#">Make Default</a></li> --}}
-							</ul>
+					</div><!-- .card -->
+				</div><!-- .col -->
+
+				<!--Show Wallet Address Modal -->
+				<div class="modal fade" tabindex="-1" id="showAddressModal-{{$wallet->id}}">
+					<div class="modal-dialog modal-dialog-top" role="document">
+						<div class="modal-content">
+							<a href="#" class="close" data-dismiss="modal" aria-label="Close">
+								<em class="icon ni ni-cross"></em>
+							</a>
+							<div class="modal-header">
+								<h5 class="modal-title">Modal Title</h5>
+							</div>
+							<div class=" m-3 alert alert-warning alert-dismissible">
+								@switch($wallet->crypto_type)
+								@case('btc')
+								Remember to send only Bitcoin (BTC) to this address.
+								Don't send Tether (USDT) or Bitcoin Cash (BCH) to this address as you may not be able to
+								retrieve these funds.
+								@break
+								@case('eth')
+								Make sure you receive only ETH or ERC20-USDT to this wallet address.
+								If you receive any other ERC20 token, you may not be able to retrieve these funds.
+								@break
+								@case('usdteth')
+								Make sure you’re sending only ERC20-USDT tokens to this wallet address. If you send any other
+								USDT token,
+								you may not be able to retrieve these funds.
+								@break
+
+								@default
+
+								@endswitch
+
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<label class="form-label" for="default-01">Your wallet address</label>
+									<div class="form-control-wrap">
+										<input type="text" class="form-control" id="default-01"
+											value="{{$wallet->address->address}}" disabled>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer bg-light">
+								<span class="sub-text">Modal Footer Text</span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div><!-- .card -->
+			@endforeach
+
+			@if (count($wallets) < 3) <div class="col-sm-6 col-lg-4 ">
+				<div class="card card-bordered dashed h-100">
+					<div class="nk-wgw-add">
+						<div class="nk-wgw-inner">
+							<a href="#"  type="button" data-toggle="modal"
+							data-target="#showCreateWalletModal">
+								<div class="add-icon">
+									<em class="icon ni ni-plus"></em>
+								</div>
+								<h6 class="title">Add New Wallet</h6>
+							</a>
+							<span class="sub-text">You can add your more wallet in your account to manage separetly.</span>
+						</div>
+					</div>
+				</div><!-- .card -->
 		</div><!-- .col -->
-		@endforeach
-		@if (count($wallets) < 3) <div class="col-sm-6 col-lg-4 ">
-			<div class="card card-bordered dashed h-100">
-				<div class="nk-wgw-add">
-					<div class="nk-wgw-inner">
-						<a href="{{route('wallets.create')}}">
-							<div class="add-icon">
-								<em class="icon ni ni-plus"></em>
-							</div>
-							<h6 class="title">Add New Wallet</h6>
-						</a>
-						<span class="sub-text">You can add your more wallet in your account to manage separetly.</span>
-					</div>
-				</div>
-			</div><!-- .card -->
-	</div><!-- .col -->
-	@endif
+		@endif
 
-</div><!-- .row -->
+	</div><!-- .row -->
 </div>
 
+<!--Create Wallet Modal -->
+<div class="modal fade" tabindex="-1" id="showCreateWalletModal">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content">
+			<a href="#" class="close" data-dismiss="modal" aria-label="Close">
+				<em class="icon ni ni-cross"></em>
+			</a>
+			<div class="modal-header">
+				<h5 class="modal-title">Create Wallet</h5>
+			</div>
 
+			<div class="modal-body">
+				<form action="{{route('wallets.store')}}" method="POST" class="gy-3" name="formA">
+					@csrf
+					<div class="form-group">
+						<label class="form-label">Select Crypto Type</label>
+						<div class="form-control-wrap">
+							<select name="crypto_type" class="form-select form-control form-control-lg">
+								<option value="btc">Bitcoin</option>
+								<option value="eth">Ethereum</option>
+								<option value="usdteth">Tether</option>
+							</select>
+						</div>
+					</div>
 
+					<div class="row g-3">
+						<div class="col-lg-7 offset-lg-5">
+							<div class="form-group">
+								<button type="submit" class="btn btn-lg btn-primary">Create</button>
+							</div>
+						</div>
+					</div>
+                </form>
+			</div>
+
+		</div>
+	</div>
+</div>
 <script src="{{ asset('design/js/custom/user.js') }}"></script>
 <script>
 	const viewWallets = '.view-wallet';
 
 	$(viewWallets).each(function (index, val) {
 		let target = this,
-		 walletId = $('.wallet-id', target),
-		 addressId = $('.address-id', target),
-		 uri = '{{ config('app.url') }}/wallets/getWalletBalance/' + walletId.val() + '/' + addressId.val() ;
+			walletId = $('.wallet-id', target),
+			addressId = $('.address-id', target),
+			uri = '{{ config('
+		app.url ') }}/wallets/getWalletBalance/' + walletId.val() + '/' + addressId.val();
 		// var wallet_balance = $('#wallet-balance-' + index).val();
 
 		console.log(uri);
@@ -236,46 +337,19 @@
 			timeout: 8000,
 			dataType: 'json',
 			complete: function (xhr) {
-				let	resp = xhr.responseJSON;
+				let resp = xhr.responseJSON;
 				if (xhr.status === 200)
-				$('.final-balance', target).text(resp.balance);
+					$('.final-balance', target).text(resp.balance);
 				$('.loaderImage').hide();
 			},
 			error: function () {
 				alert('Please check your internet connection!');
-				$('.loaderImage').hide();
+				// $('.loaderImage').hide();
 			}
 		});
 
 	});
+
 </script>
-{{-- <script>
-		let uri = 'https://api.coinbase.com/v2/exchange-rates?currency=' + _crypto_type;
 
-$.ajax({
-	url: uri, method: 'GET', timeout: 8000, dataType: 'json', complete: function (xhr) {
-		let /*_percentage,*/
-			resp = xhr.responseJSON;
-
-		if (xhr.status === 200)
-
-			if (typeof _percentage === 'function') {
-				price = parseFloat(resp.data.rates.NGN);
-				_price = ((price * percentage) / 100) + price;
-				/*_percentage = ((price * percentage) / 100);
-				_price = _percentage + price;*/
-			} else {
-				index_price = parseFloat(resp.data.rates.NGN);
-				_index_price = ((index_price * _percentage) / 100) + index_price;
-			}
-
-		if (typeof _percentage === 'function')
-			_percentage();
-		else if (typeof callback === 'function')
-			callback();
-	}, error: function () {
-		/*alert('Please check your internet connection!');*/
-	}
-});
-	</script> --}}
 @endsection

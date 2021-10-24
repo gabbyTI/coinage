@@ -16,6 +16,10 @@ class CreateFiatWalletsTable extends Migration
 		Schema::create('fiat_wallets', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('user_id');
+			$table->string('phoneNumber')->nullable();
+			$table->string('accountNumber')->nullable();
+			$table->string('bank')->nullable();
+			$table->string('accountName')->nullable();
 			$table->string('currency')->nullable();
 			$table->decimal('balance', 10, 2)->nullable();
 			$table->timestamps();

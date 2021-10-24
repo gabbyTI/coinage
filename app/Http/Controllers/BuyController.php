@@ -61,4 +61,12 @@ class BuyController extends Controller
 		])->get();
 		return view('buy.buy', compact('offers', $offers));
 	}
+	public function buyUsdt()
+	{
+		$offers = Offer::where([
+			['crypto_type', '=', 'USDT'],
+			['user_id', '<>', auth()->id()],
+		])->get();
+		return view('buy.buy', compact('offers', $offers));
+	}
 }

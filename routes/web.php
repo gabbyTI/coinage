@@ -51,8 +51,10 @@ Route::middleware(['auth', 'verified', 'password.confirm'])->group(function () {
 	//Wallets
 	Route::get('/wallets', [WalletController::class, 'index'])->name('wallets.index');
 	Route::get('/wallets/getWalletBalance/{wallet}/{address}', [WalletController::class, 'getWalletBalance'])->name('wallet.balance');
+	Route::get('/wallets/getFiatWalletBalance/{fiatWallet}', [WalletController::class, 'getFiatWalletBalance'])->name('fiatWallet.balance');
 	Route::get('/wallets/create', [WalletController::class, 'create'])->name('wallets.create');
 	Route::post('/wallets/store', [WalletController::class, 'store'])->name('wallets.store');
+	// Route::post('/wallets/storeFiat', [WalletController::class, 'storeFiat'])->name('wallets.storeFiat');
 	Route::get('/wallets/show/{wallet}', [WalletController::class, 'show'])->name('wallets.show');
 
 
@@ -72,6 +74,7 @@ Route::middleware(['auth', 'verified', 'password.confirm'])->group(function () {
 	Route::get('/buy/ltc', [BuyController::class, 'buyLtc'])->name('buy.ltc');
 	Route::get('/buy/xrp', [BuyController::class, 'buyXrp'])->name('buy.xrp');
 	Route::get('/buy/doge', [BuyController::class, 'buyDoge'])->name('buy.doge');
+	Route::get('/buy/usdt', [BuyController::class, 'buyUsdt'])->name('buy.usdt');
 
 
 

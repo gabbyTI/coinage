@@ -38,19 +38,25 @@
 		</div>
 	</div>
 	<div class="row g-gs">
-		<div class="col-md-6 col-lg-4">
+		<div class="col-md-6 col-lg-4 view-fiat-wallet">
+			<input type="text" class="fiat-wallet-id" value="{{$fiatWallet->id}}" hidden>
 			<div class="card card-bordered">
 				<div class="nk-wgw">
 					<div class="nk-wgw-inner">
 						<a class="nk-wgw-name" href="html/crypto/wallet-bitcoin.html">
-							<div class="nk-wgw-icon is-default">
+							{{-- <div class="nk-wgw-icon is-default">
 								<em class="icon ni ni-sign-usd"></em>
+							</div> --}}
+							<div class="nk-wgw-icon">
+								₦
+								{{-- <em class="icon ni ni-sign-usd"></em> --}}
 							</div>
 							<h5 class="nk-wgw-title title">Naira Account</h5>
 						</a>
 						<div class="nk-wgw-balance">
 							<div class="amount">
-								{{auth()->user()->getFiatWalletbalance('ngn')}}
+								<span class="final-balance"><img src="{{asset('design/img/ajax-loader.gif')}}"
+									class="loaderImageFiat" alt="loading"></span>
 								<span class="currency currency-ngn">NGN</span>
 							</div>
 						</div>
@@ -58,7 +64,8 @@
 					<div class="nk-wgw-actions">
 						<ul>
 							{{-- <li><a href="#"><em class="icon ni ni-arrow-up-right"></em> <span>Send</span></a></li> --}}
-							<li><a href="#"><em class="icon ni ni-arrow-to-down"></em><span>Deposit</span></a></li>
+							<li><a href="#" type="button" data-toggle="modal"
+								data-target="#showAccountModal"><em class="icon ni ni-arrow-to-down"></em><span>Deposit</span></a></li>
 							<li><a href="#"><em class="icon ni ni-arrow-to-right"></em><span>Withdraw</span></a></li>
 						</ul>
 					</div>
@@ -77,57 +84,23 @@
 				</div>
 			</div><!-- .card -->
 		</div><!-- .col -->
+
 		{{-- <div class="col-md-6 col-lg-4">
-				<div class="card card-bordered">
-					<div class="nk-wgw">
-						<div class="nk-wgw-inner">
-							<a class="nk-wgw-name" href="html/crypto/wallet-bitcoin.html">
-								<div class="nk-wgw-icon">
-									<em class="icon ni ni-sign-eur"></em>
-								</div>
-								<h5 class="nk-wgw-title title">EUR Account</h5>
-							</a>
-							<div class="nk-wgw-balance">
-								<div class="amount">12,495.90<span class="currency currency-eur">EUR</span></div>
-								<div class="amount-sm">12,495.90<span class="currency currency-usd">USD</span></div>
+			<div class="card card-bordered dashed h-100">
+				<div class="nk-wgw-add">
+					<div class="nk-wgw-inner">
+						<a href="#" type="button" data-toggle="modal"
+						data-target="#showCreateFiatWalletModal">
+							<div class="add-icon">
+								<em class="icon ni ni-plus"></em>
 							</div>
-						</div>
-						<div class="nk-wgw-actions">
-							<ul>
-								<li><a href="#"><em class="icon ni ni-arrow-up-right"></em> <span>Send</span></a></li>
-								<li><a href="#"><em class="icon ni ni-arrow-down-left"></em><span>Receive</span></a></li>
-								<li><a href="#"><em class="icon ni ni-arrow-to-right"></em><span>Withdraw</span></a></li>
-							</ul>
-						</div>
-						<div class="nk-wgw-more dropdown">
-							<a href="#" class="btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-							<div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-								<ul class="link-list-plain sm">
-									<li><a href="#">Details</a></li>
-									<li><a href="#">Edit</a></li>
-									<li><a href="#">Delete</a></li>
-									<li><a href="#">Make Default</a></li>
-								</ul>
-							</div>
-						</div>
+							<h6 class="title">Add New Wallet</h6>
+						</a>
+						<span class="sub-text">You can add your more wallet in your account to manage separetly.</span>
 					</div>
-				</div><!-- .card -->
-			</div><!-- .col -->
-			<div class="col-md-6 col-lg-4">
-				<div class="card card-bordered dashed h-100">
-					<div class="nk-wgw-add">
-						<div class="nk-wgw-inner">
-							<a href="#">
-								<div class="add-icon">
-									<em class="icon ni ni-plus"></em>
-								</div>
-								<h6 class="title">Add New Wallet</h6>
-							</a>
-							<span class="sub-text">You can add your more wallet in your account to manage separetly.</span>
-						</div>
-					</div>
-				</div><!-- .card -->
-			</div><!-- .col --> --}}
+				</div>
+			</div><!-- .card -->
+		</div><!-- .col --> --}}
 	</div><!-- .row -->
 </div><!-- .nk-block -->
 
@@ -156,8 +129,7 @@
 							<div class="nk-wgw-inner">
 								<a class="nk-wgw-name" href="{{route('wallets.show',$wallet->id)}}">
 									<div class="nk-wgw-icon">
-										<em
-											class="icon ni ni-sign-{{$wallet->crypto_type == 'usdteth'?'usdt' : $wallet->crypto_type}}"></em>
+										<em class="icon ni ni-sign-{{$wallet->crypto_type == 'usdteth'?'usdt' : $wallet->crypto_type}}"></em>
 									</div>
 									@switch($wallet->crypto_type)
 									@case('btc')
@@ -317,6 +289,60 @@
 		</div>
 	</div>
 </div>
+
+<!--Show deposit Wallet account details Modal -->
+<div class="modal fade" tabindex="-1" id="showAccountModal">
+	<div class="modal-dialog modal-dialog-top" role="document">
+		<div class="modal-content">
+			<a href="#" class="close" data-dismiss="modal" aria-label="Close">
+				<em class="icon ni ni-cross"></em>
+			</a>
+			<div class="modal-header">
+				<h5 class="modal-title">Deposit</h5>
+			</div>
+
+			<div class="modal-body">
+				<div id="accordion" class="accordion">
+					<div class="accordion-item">
+						<a href="#" class="accordion-head" data-toggle="collapse" data-target="#accordion-item-1">
+							<h6 class="fs-20px">Deposit with bank transfer</h6>
+							<span class="accordion-icon"></span>
+						</a>
+						<div class="accordion-body collapse" id="accordion-item-1" data-parent="#accordion">
+							<div class="accordion-inner">
+								<div class=" alert alert-info alert-dismissible">
+									Kindly transfer funds to your dedicated bank account and your wallet will be credited. Find the account details below ,
+								</div>
+									Account Name
+									<input type="text" class="form-control fs-18px bg-white mb-1" value="{{$fiatWallet->accountName}}" disabled>
+									Account Number
+									<input type="text" class="form-control fs-18px bg-white mb-1" value="{{$fiatWallet->accountNumber}}" disabled>
+									Bank Name
+									<input type="text" class="form-control fs-18px bg-white mb-1" value="{{$fiatWallet->bank}}" disabled>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<a href="#" class="accordion-head collapsed" data-toggle="collapse" data-target="#accordion-item-2">
+							<h6 class="fs-20px">Deposit with card</h6>
+							<span class="accordion-icon"></span>
+						</a>
+						<div class="accordion-body collapse" id="accordion-item-2" data-parent="#accordion" >
+							<div class="accordion-inner">
+								<div class=" alert alert-info alert-dismissible">
+									This feature isn't available yet,
+								</div>
+							</div>
+						</div>
+					</div>
+
+				  </div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
 <script src="{{ asset('design/js/custom/user.js') }}"></script>
 <script>
 	const viewWallets = '.view-wallet';
@@ -329,7 +355,7 @@
 		app.url ') }}/wallets/getWalletBalance/' + walletId.val() + '/' + addressId.val();
 		// var wallet_balance = $('#wallet-balance-' + index).val();
 
-		console.log(uri);
+		// console.log(uri);
 		$('.loaderImage', target).show();
 		$.ajax({
 			url: uri,
@@ -343,7 +369,7 @@
 				$('.loaderImage').hide();
 			},
 			error: function () {
-				alert('Please check your internet connection!');
+				alert('Please check your network connection.');
 				// $('.loaderImage').hide();
 			}
 		});
@@ -351,5 +377,38 @@
 	});
 
 </script>
+
+<script>
+	const viewFiatWallets = '.view-fiat-wallet';
+
+	$(viewFiatWallets).each(function (index, val) {
+		let target = this,
+			fiatWalletId = $('.fiat-wallet-id', target),
+			uri = '{{ config('app.url') }}/wallets/getFiatWalletBalance/' + fiatWalletId.val();
+
+		// console.log(uri);
+		$('.loaderImageFiat', target).show();
+		$.ajax({
+			url: uri,
+			method: 'GET',
+			timeout: 8000,
+			dataType: 'json',
+			complete: function (xhr) {
+				let resp = xhr.responseJSON;
+				// console.log(resp);
+				if (xhr.status === 200)
+					$('.final-balance', target).text(resp.balance);
+				$('.loaderImage').hide();
+			},
+			error: function () {
+				alert('Please check your network connection.');
+				// $('.loaderImage').hide();
+			}
+		});
+
+	});
+
+</script>
+
 
 @endsection

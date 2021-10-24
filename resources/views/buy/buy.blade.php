@@ -11,9 +11,10 @@
 			<div class="d-flex ">
 				<div class="flex-fill mr-1"><a href="{{route('buy.btc')}}" class="btn btn-primary center text-white @if(Route::is('buy.btc')) active @endif">BTC</a></div>
 				<div class="flex-fill mr-1"><a href="{{route('buy.eth')}}" class="btn btn-primary center text-white @if(Route::is('buy.eth')) active @endif">ETH</a></div>
-				<div class="flex-fill mr-1"><a href="{{route('buy.xrp')}}" class="btn btn-primary center text-white @if(Route::is('buy.xrp')) active @endif">XRP</a></div>
+				<div class="flex-fill mr-1"><a href="{{route('buy.usdt')}}" class="btn btn-primary center text-white @if(Route::is('buy.usdt')) active @endif">USDT</a></div>
+				{{-- <div class="flex-fill mr-1"><a href="{{route('buy.xrp')}}" class="btn btn-primary center text-white @if(Route::is('buy.xrp')) active @endif">XRP</a></div>
 				<div class="flex-fill mr-1"><a href="{{route('buy.ltc')}}" class="btn btn-primary center text-white @if(Route::is('buy.ltc')) active @endif">LTC</a></div>
-				<div class="flex-fill mr-1"><a href="{{route('buy.doge')}}" class="btn btn-primary center text-white @if(Route::is('buy.doge')) active @endif">DOGE</a></div>
+				<div class="flex-fill mr-1"><a href="{{route('buy.doge')}}" class="btn btn-primary center text-white @if(Route::is('buy.doge')) active @endif">DOGE</a></div> --}}
 			</div>
 			<div class="card card-preview border-0">
 				<div class="card-body px-0">

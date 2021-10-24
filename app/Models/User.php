@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\WalletAfricaApi;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,10 +59,28 @@ class User extends Authenticatable implements MustVerifyEmail
 				'user_id' => $model->id,
 			]);
 
+			$walletAfricaApi = new WalletAfricaApi();
+
+			$response = $walletAfricaApi->callApi(
+				'POST',
+				'/Wallet/generate/',
+				[
+					"firstName" => $model->other_names,
+					"lastName" => $model->surname,
+					"email" =>  $model->email,
+					"secretKey" => config('app.wallets_africa_secret_key'),
+					"currency" => "NGN"
+				]
+			);
+
 			FiatWallet::create([
-				'user_id' => $model->id,
+				'user_id' => auth()->id(),
 				'currency' => 'ngn',
-				'balance' => 0.00
+				'balance' => 0.00,
+				"phoneNumber" => $response->apiData->data->phoneNumber,
+				"accountNumber" => $response->apiData->data->accountNumber,
+				"bank" => $response->apiData->data->bank,
+				"accountName" => $response->apiData->data->accountName,
 			]);
 		});
 	}

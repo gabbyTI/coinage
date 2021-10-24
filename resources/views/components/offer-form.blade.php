@@ -8,28 +8,28 @@
     </div>
     <div class="col-lg-7" {{ !empty($offer) ? 'hidden' : NULL }}>
         <div class="form-group">
-            <div class="custom-control {{--custom-control-sm--}} custom-radio">
+            <div class="custom-control custom-radio">
                 <input class="custom-control-input crypto_type" type="radio" name="crypto_type" id="crypto-btc" value="BTC" {{ !empty($offer) ? ($offer->crypto_type === 'BTC' ? 'checked' : NULL) : 'checked' }}>
                 <label class="custom-control-label" for="crypto-btc">BITCOIN</label>
             </div>
-            <div class="custom-control {{--custom-control-sm--}} custom-radio">
+            <div class="custom-control custom-radio">
                 <input class="custom-control-input crypto_type" type="radio" name="crypto_type" id="crypto-eth" value="ETH" {{ !empty($offer) ? ($offer->crypto_type === 'ETH' ? 'checked' : NULL) : NULL }}>
                 <label class="custom-control-label" for="crypto-eth">ETHEREUM</label>
             </div>
-            <div class="custom-control {{--custom-control-sm--}} custom-radio">
+            {{-- <div class="custom-control custom-radio">
                 <input class="custom-control-input crypto_type" type="radio" name="crypto_type" id="crypto-ltc" value="LTC" {{ !empty($offer) ? ($offer->crypto_type === 'LTC' ? 'checked' : NULL) : NULL }}>
                 <label class="custom-control-label" for="crypto-ltc">LITECOIN</label>
             </div>
-            <div class="custom-control {{--custom-control-sm--}} custom-radio">
+            <div class="custom-control custom-radio">
                 <input class="custom-control-input crypto_type" type="radio" name="crypto_type" id="crypto-xrp" value="XRP" {{ !empty($offer) ? ($offer->crypto_type === 'XRP' ? 'checked' : NULL) : NULL }}>
                 <label class="custom-control-label" for="crypto-xrp">X-RIPPLE</label>
             </div>
-            <!--<div class="custom-control {{--custom-control-sm--}} custom-radio">
+            <div class="custom-control custom-radio">
                 <input class="custom-control-input crypto_type" type="radio" name="crypto_type" id="crypto-doge" value="DOGE" {{ !empty($offer) ? ($offer->crypto_type === 'DOGE' ? 'checked' : NULL) : NULL }}>
                 <label class="custom-control-label" for="crypto-doge">DOGECOIN</label>
-            </div>-->
+            </div> --}}
 
-			<div class="custom-control {{--custom-control-sm--}} custom-radio">
+			<div class="custom-control custom-radio">
                 <input class="custom-control-input crypto_type" type="radio" name="crypto_type" id="crypto-usdt" value="USDT" {{ !empty($offer) ? ($offer->crypto_type === 'USDT' ? 'checked' : NULL) : NULL }}>
                 <label class="custom-control-label" for="crypto-usdt">USD TETHER</label>
             </div>

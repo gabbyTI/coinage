@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CryptoProcessingApi;
+use App\Helpers\WalletAfricaApi;
 use App\Models\Address;
+use App\Models\FiatWallet;
 use App\Models\Wallet;
 use Carbon\Carbon;
+use Faker\Provider\Uuid;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,7 +27,9 @@ class WalletController extends Controller
 	public function index()
 	{
 		$wallets = Wallet::all()->where('user_id', Auth::id());
-		return view('wallets.index', compact('wallets', $wallets));
+		$fiatWallet = FiatWallet::all()->where('user_id', Auth::id())->first();
+		// dd($fiatWallet);
+		return view('wallets.index', compact('wallets', 'fiatWallet'));
 	}
 
 	/**
@@ -104,6 +109,36 @@ class WalletController extends Controller
 		}
 	}
 
+	// public function storeFiat(Request $request)
+	// {
+
+	// 	$walletAfricaApi = new WalletAfricaApi();
+
+	// 	$response = $walletAfricaApi->callApi(
+	// 		'POST',
+	// 		'/Wallet/generate/',
+	// 		[
+	// 			"firstName" => auth()->user()->other_names,
+	// 			"lastName" => auth()->user()->surname,
+	// 			"email" =>  auth()->user()->email,
+	// 			"secretKey" => config('app.wallets_africa_secret_key'),
+	// 			"currency" => "NGN"
+	// 		]
+	// 	);
+	// 	// dd($response->apiData->data->phoneNumber);
+
+	// 	$fiatWallet = FiatWallet::create([
+	// 		'user_id' => auth()->id(),
+	// 		'currency' => 'ngn',
+	// 		'balance' => 0.00,
+	// 		"phoneNumber" => $response->apiData->data->phoneNumber,
+	// 		"accountNumber" => $response->apiData->data->accountNumber,
+	// 		"bank" => $response->apiData->data->bank,
+	// 		"accountName" => $response->apiData->data->accountName,
+	// 	]);
+	// 	dd($fiatWallet);
+	// }
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -128,6 +163,44 @@ class WalletController extends Controller
 		} else {
 			$response['error'] = false;
 			$response['balance'] = number_format($addressResponse->apiData->data->final_balance, 8);
+			$this->status = 200;
+		}
+
+
+		return response($response, $this->status);
+	}
+
+	public function getFiatWalletBalance(FiatWallet $fiatWallet)
+	{
+		$response = [];
+		$walletAfricaApi = new WalletAfricaApi();
+
+		// Credit Test Money
+		$walletAfricaApi->callApi(
+			'POST',
+			'/wallet/credit/',
+			[
+				"transactionReference" => Uuid::uuid(),
+				"phoneNumber" =>  $fiatWallet->phoneNumber,
+				"amount" => 37534,
+				"secretKey" => config('app.wallets_africa_secret_key'),
+			]
+		);
+		$apiResponse = $walletAfricaApi->callApi(
+			'POST',
+			'/wallet/balance/',
+			[
+				"phoneNumber" =>  $fiatWallet->phoneNumber,
+				"currency" => strtoupper($fiatWallet->currency),
+				"secretKey" => config('app.wallets_africa_secret_key'),
+			]
+		);
+		if ($apiResponse->error) {
+			$response['error'] = true;
+			$response['balance'] = '0.00';
+		} else {
+			$response['error'] = false;
+			$response['balance'] = number_format($apiResponse->apiData->data->walletBalance, 2);
 			$this->status = 200;
 		}
 

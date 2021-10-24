@@ -13,6 +13,10 @@ class FiatWallet extends Model
 		'user_id',
 		'currency',
 		'balance',
+		"phoneNumber",
+		"accountNumber",
+		"bank",
+		"accountName"
 	];
 
 	public function user()

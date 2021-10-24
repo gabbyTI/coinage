@@ -52,6 +52,18 @@ return [
 	'crypto_processing_token' => env('CRYPTO_PROCESSING_TOKEN', '2e2094cbd998af92b6830b0b4c3cb85e976bd89d9be60dca4a6d9ea0c3a62c60'),
 	'crypto_processing_base_uri' => env('CRYPTO_PROCESSING_BASE_URI', 'https://testnet.cryptoprocessing.io/api/v1'),
 
+	/*
+    |--------------------------------------------------------------------------
+    | Wallet Afreica API Params
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+	'wallets_africa_public_key' => env('WALLETS_AFRICA_PUBLIC_KEY', 'uvjqzm5xl6bw'),
+	'wallets_africa_secret_key' => env('WALLETS_AFRICA_SECRET_KEY', 'hfucj5jatq8h'),
+	'wallets_africa_base_uri' => env('WALLETS_AFRICA_BASE_URI', 'https://sandbox.wallets.africa'),
+
 
 
 

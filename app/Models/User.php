@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
 			);
 
 			FiatWallet::create([
-				'user_id' => auth()->id(),
+				'user_id' => $model->id,
 				'currency' => 'ngn',
 				'balance' => 0.00,
 				"phoneNumber" => $response->apiData->data->phoneNumber,

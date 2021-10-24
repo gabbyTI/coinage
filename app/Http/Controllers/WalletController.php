@@ -176,16 +176,16 @@ class WalletController extends Controller
 		$walletAfricaApi = new WalletAfricaApi();
 
 		// Credit Test Money
-		$walletAfricaApi->callApi(
-			'POST',
-			'/wallet/credit/',
-			[
-				"transactionReference" => Uuid::uuid(),
-				"phoneNumber" =>  $fiatWallet->phoneNumber,
-				"amount" => 37534,
-				"secretKey" => config('app.wallets_africa_secret_key'),
-			]
-		);
+		// $walletAfricaApi->callApi(
+		// 	'POST',
+		// 	'/wallet/credit/',
+		// 	[
+		// 		"transactionReference" => Uuid::uuid(),
+		// 		"phoneNumber" =>  $fiatWallet->phoneNumber,
+		// 		"amount" => 37534,
+		// 		"secretKey" => config('app.wallets_africa_secret_key'),
+		// 	]
+		// );
 		$apiResponse = $walletAfricaApi->callApi(
 			'POST',
 			'/wallet/balance/',

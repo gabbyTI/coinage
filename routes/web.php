@@ -3,7 +3,9 @@
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\PaystackController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
 	return view('about');
 });
+
 
 Auth::routes(['verify' => true]);
 
@@ -77,6 +80,9 @@ Route::middleware(['auth', 'verified', 'password.confirm'])->group(function () {
 	Route::get('/buy/usdt', [BuyController::class, 'buyUsdt'])->name('buy.usdt');
 
 
-
 	Route::get('/buy/{offer:id}', [BuyController::class, 'show'])->name('buy.show');
+
+	//Paystack
+	Route::get('/paystack/verify_transaction', [TransactionController::class, 'deposit']);
+	Route::post('/paystack/verify', [PaystackController::class, 'testTwo']);
 });

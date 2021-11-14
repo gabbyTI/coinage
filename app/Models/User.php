@@ -59,28 +59,24 @@ class User extends Authenticatable implements MustVerifyEmail
 				'user_id' => $model->id,
 			]);
 
-			$walletAfricaApi = new WalletAfricaApi();
+			// $walletAfricaApi = new WalletAfricaApi();
 
-			$response = $walletAfricaApi->callApi(
-				'POST',
-				'/Wallet/generate/',
-				[
-					"firstName" => $model->other_names,
-					"lastName" => $model->surname,
-					"email" =>  $model->email,
-					"secretKey" => config('app.wallets_africa_secret_key'),
-					"currency" => "NGN"
-				]
-			);
+			// $response = $walletAfricaApi->callApi(
+			// 	'POST',
+			// 	'/Wallet/generate/',
+			// 	[
+			// 		"firstName" => $model->other_names,
+			// 		"lastName" => $model->surname,
+			// 		"email" =>  $model->email,
+			// 		"secretKey" => config('app.wallets_africa_secret_key'),
+			// 		"currency" => "NGN"
+			// 	]
+			// );
 
 			FiatWallet::create([
 				'user_id' => $model->id,
 				'currency' => 'ngn',
-				'balance' => 0.00,
-				"phoneNumber" => $response->apiData->data->phoneNumber,
-				"accountNumber" => $response->apiData->data->accountNumber,
-				"bank" => $response->apiData->data->bank,
-				"accountName" => $response->apiData->data->accountName,
+				'balance' => 0,
 			]);
 		});
 	}
@@ -144,7 +140,7 @@ class User extends Authenticatable implements MustVerifyEmail
 	{
 		$fiatWallet = $this->fiatWallets->where('currency', $currency)->first();
 
-		return $fiatWallet == null ? null : number_format($fiatWallet->balance, 2);
+		return $fiatWallet == null ? null : $fiatWallet->balance;
 	}
 
 	// Attribute

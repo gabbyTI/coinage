@@ -1,0 +1,433 @@
+{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mjg1NTQwLCJpYXQiOjE2MzY3NDUzMjcsIm5iZiI6MTYzNjc0NTMyNywiZXhwIjoxNjM2ODMxNzI3fQ.vT0MSkADxvXNhUWVpk2m2rTqXazxZ7XljRlPq3eXcTM",
+  "user": {
+    "integrations": [
+      {
+        "business_name": "Bloodzone Technologies Limited",
+        "business_type": "starter",
+        "short_name": null,
+        "id": 405659,
+        "logged_in_user_role": {
+          "id": 34,
+          "name": "admin",
+          "description": "This role grants users the permissions to manage everything on the dashboard"
+        },
+        "country_code": "NG",
+        "country": 1
+      },
+      {
+        "business_name": "Rache skincare",
+        "business_type": "starter",
+        "short_name": null,
+        "id": 426617,
+        "logged_in_user_role": {
+          "id": 34,
+          "name": "admin",
+          "description": "This role grants users the permissions to manage everything on the dashboard"
+        },
+        "country_code": "NG",
+        "country": 1
+      },
+      {
+        "business_name": "5kshoppers",
+        "business_type": "starter",
+        "short_name": null,
+        "id": 511713,
+        "logged_in_user_role": {
+          "id": 34,
+          "name": "admin",
+          "description": "This role grants users the permissions to manage everything on the dashboard"
+        },
+        "country_code": "NG",
+        "country": 1
+      }
+    ],
+    "email": "gabrielibenye@gmail.com",
+    "first_name": "gabriel",
+    "last_name": "ibenye",
+    "phone": "8142368898",
+    "area_code": "0",
+    "calling_code": "+234",
+    "registration_complete": true,
+    "last_login": "2021-11-12T14:27:55.000Z",
+    "wt_access": "none",
+    "is_developer": true,
+    "job_title": "ceo",
+    "truecaller_verified": true,
+    "drip_tag": "merchant - nigeria",
+    "mfa_enabled": false,
+    "email_verified": false,
+    "id": 285540,
+    "invited_by": null,
+    "current_integration": 405659,
+    "passwordLastResetAt": "2021-11-07T23:53:20.000Z",
+    "createdAt": "2019-04-21T16:45:54.000Z",
+    "updatedAt": "2021-11-12T14:27:55.000Z",
+    "display_state": "test",
+    "role": {
+      "value": 1090921693175,
+      "name": "admin",
+      "description": "This role grants users the permissions to manage everything on the dashboard",
+      "integration": 0,
+      "service": "dashboard",
+      "id": 34,
+      "organization": 1,
+      "createdAt": "2018-05-10T23:40:26.000Z",
+      "updatedAt": "2018-09-12T17:28:31.000Z",
+      "isDeleted": false,
+      "is_custom": false
+    },
+    "permissions": [
+      "api-key-*",
+      "api-key-view",
+      "user-view",
+      "user-*",
+      "metrics-*",
+      "settings-*",
+      "settings-view",
+      "transaction-view",
+      "transaction-export",
+      "transaction-dispute",
+      "customer-view",
+      "customer-add",
+      "customer-*",
+      "transfer-view",
+      "transfer-*",
+      "transfer-export",
+      "balance-view",
+      "balance-export",
+      "page-view",
+      "page-*",
+      "plan-view",
+      "plan-*",
+      "settlement-view",
+      "settlement-export",
+      "paymentrequest-view",
+      "paymentrequest-*",
+      "subaccount-*",
+      "subaccount-view",
+      "user-add",
+      "customer-insights",
+      "accounts-*",
+      "accounts-view",
+      "charge-*",
+      "request-payout",
+      "product-view",
+      "product-*",
+      "pos-terminal-*",
+      "applepay-*"
+    ],
+    "password_expiry": "2022-11-02T23:53:20.000Z",
+    "dashboard_preferences": {
+      "pagination": {},
+      "timezone": "UTC"
+    },
+    "show_mfa_feature": true
+  },
+  "token_expiry": 1636831727,
+  "selected_integration": {
+    "users": [],
+    "keys": [
+      {
+        "id": 726297,
+        "key": "sk_test_b4b0c6565206c58176dcabf4adb86bdcc8268ac0",
+        "domain": "test",
+        "type": "secret"
+      },
+      {
+        "id": 726298,
+        "key": "pk_test_305cb5b5787b3adfe45ca9d51b643344a2174c9e",
+        "domain": "test",
+        "type": "public"
+      },
+      {
+        "id": 884633,
+        "key": "sk_live_edc2a972968375f3f0c783521bb6a97868712ed9",
+        "domain": "live",
+        "type": "secret"
+      },
+      {
+        "id": 884634,
+        "key": "pk_live_3d37bb452de897c6e9943f8dbdadbc22c525a010",
+        "domain": "live",
+        "type": "public"
+      }
+    ],
+    "terminals": [],
+    "starterintegration": [
+      {
+        "integration": 405659,
+        "id": 71503,
+        "business_upgrade_requested": false,
+        "business_upgrade_requested_at": null,
+        "extra_limit": false,
+        "upgraded": false,
+        "createdAt": "2020-01-13T18:21:57.000Z",
+        "updatedAt": "2020-01-13T18:21:57.000Z"
+      }
+    ],
+    "integrationlocale": [
+      {
+        "id": 370582,
+        "integration": 405659,
+        "locale": 26,
+        "locale_overrides": null,
+        "createdAt": "2020-01-03T23:03:19.000Z",
+        "updatedAt": "2020-01-03T23:03:19.000Z"
+      }
+    ],
+    "business_name": "Bloodzone Technologies Limited",
+    "description": "Bloodzone technology limited is technology company that develops web solutions for hospitals and health facilities.",
+    "phone": "8131117279",
+    "email": "bloodzoneng@gmail.com",
+    "address": "Plot 3554, Cadastral Zone F13, Phase 4, Kubwa, FCT Abuja.",
+    "product_name": null,
+    "registration_document_number": null,
+    "registration_document_type": null,
+    "primary_contact_name": "Bien Nwinate",
+    "primary_contact_email": "biennwinate@gmail.com",
+    "primary_contact_phone": "+2348076079667",
+    "support_email": "bloodzoneng@gmail.com",
+    "chargeback_email": "bloodzoneng@gmail.com",
+    "logo_path": "https://public-files-paystack-prod.s3.eu-west-1.amazonaws.com/integration-logos/qsoOD8UmzqsmT2BMjFB8",
+    "integration_agreement_path": null,
+    "settlement_bank": "057",
+    "account_number": "1017316270",
+    "registration_document_path": null,
+    "risk_level": "high",
+    "isw_category": 3,
+    "mcc_category": null,
+    "flat_rate": 100,
+    "charge_percentage": 1.5,
+    "international_flat_rate": 100,
+    "international_charge_percentage": 3.9,
+    "flat_threshhold": 2500,
+    "transfer_charge": 5000,
+    "settlement_schedule": "T1",
+    "test_redirect_url": "",
+    "test_webhook_endpoint": "https://b7ad-197-210-85-175.ngrok.io/paystack/verify",
+    "live_redirect_url": "https://center.bloodzoneng.com/payment/callback",
+    "live_webhook_endpoint": "https://center.bloodzoneng.com/pay",
+    "test_integration_url": null,
+    "test_integration_instruction": null,
+    "email_notification": "instant",
+    "pwc_id": 102501,
+    "is_live": true,
+    "go_live_requested": true,
+    "go_live_requested_at": "2020-06-23T09:32:28.000Z",
+    "live_keys_requested": false,
+    "live_keys_requested_at": null,
+    "reviewed_at": null,
+    "setup_complete": true,
+    "receipts": true,
+    "display_state": "live",
+    "active": true,
+    "short_name": null,
+    "international_toggle_disabled": true,
+    "allow_international_cards": false,
+    "active_channels": [
+      "card",
+      "bank",
+      "qr",
+      "ussd",
+      "bank_transfer"
+    ],
+    "allowed_currencies": [
+      "NGN"
+    ],
+    "allow_whitelist": false,
+    "charge_from_dashboard": false,
+    "can_transfer": true,
+    "transfer_using_otp": true,
+    "payouts_on_hold": false,
+    "go_live_date": "2020-06-23T09:32:28.000Z",
+    "payments_session_timeout": 0,
+    "metadata": null,
+    "transfer_notification": "instant",
+    "business_category": "general-services",
+    "business_size": "small",
+    "business_type": "starter",
+    "website_url": "http://bloodzoneng.com/",
+    "social_urls": {
+      "twitter": "https://twitter.com/BloodzoneNig",
+      "facebook": "https://web.facebook.com/bloodzoneNIg/",
+      "instagram": "https://www.instagram.com/official_bloodzone/"
+    },
+    "is_under_investigation": false,
+    "is_disabled": false,
+    "disable_reason": "INCOMPLETE_COMPLIANCE_DOCUMENTS",
+    "disable_at": "2021-01-13T16:08:29.000Z",
+    "identity_evidence_path": null,
+    "director_identity_evidence_path": null,
+    "bvn": null,
+    "bvn_date_of_birth": null,
+    "go_live_status": "pending-confirmation",
+    "registration_packet_path": null,
+    "is_deleted": false,
+    "default_currency": "NGN",
+    "transfer_notification_to_recipient": "instant",
+    "send_transfer_email_otp": false,
+    "fast_checkout_enabled": false,
+    "id": 405659,
+    "primary_user": 351551,
+    "organization": 1,
+    "createdAt": "2020-01-03T23:03:19.000Z",
+    "updatedAt": "2021-11-12T19:46:24.000Z",
+    "transfer_fees": [
+      {
+        "fee": 5000,
+        "thresholds": [
+          {
+            "max": 500000,
+            "fee": 1000
+          },
+          {
+            "max": 5000000,
+            "fee": 2500
+          }
+        ],
+        "currency": "NGN"
+      },
+      {
+        "fee": 1000,
+        "currency": "GHS"
+      },
+      {
+        "fee": 300,
+        "currency": "ZAR"
+      }
+    ],
+    "consent_received": false,
+    "attributes": {
+      "id": 305626,
+      "integration": 405659,
+      "country": {
+        "id": 1,
+        "active_for_dashboard_onboarding": true,
+        "name": "Nigeria",
+        "iso_code": "NG",
+        "default_currency_code": "NGN",
+        "integration_defaults": {},
+        "calling_code": "+234",
+        "relationships": {
+          "currency": {
+            "type": "currency",
+            "data": [
+              "NGN"
+            ]
+          },
+          "integration_feature": {
+            "type": "integration_feature",
+            "data": []
+          },
+          "integration_type": {
+            "type": "integration_type",
+            "data": [
+              "ITYPE_001",
+              "ITYPE_002",
+              "ITYPE_003"
+            ]
+          },
+          "payment_method": {
+            "type": "payment_method",
+            "data": [
+              "PAYM_001",
+              "PAYM_002",
+              "PAYM_003",
+              "PAYM_004"
+            ]
+          }
+        }
+      },
+      "industry": {
+        "id": 8,
+        "name": "Hospitals and Health",
+        "code": "IND_008"
+      },
+      "integration_type": {
+        "id": 1,
+        "code": "ITYPE_001",
+        "label": "starter",
+        "display_name": "Starter Business",
+        "description": "Choose this if your business is not registered yet",
+        "is_active": true,
+        "relationships": {
+          "kyc_requirement": {
+            "type": "kyc_requirement",
+            "data": [
+              "KYCREQ_001",
+              "KYCREQ_015"
+            ]
+          }
+        },
+        "upgradable_to": [
+          "ITYPE_002"
+        ]
+      },
+      "legal_business_name": "Bloodzone Technologies Limited",
+      "duplicated_from_integration": null,
+      "compliance_status": "SUBMITTED",
+      "compliance_due_date": null,
+      "incorporation_date": null,
+      "country_code": "NG",
+      "industry_code": "COMMERCE",
+      "registration_number": null,
+      "registration_type": null,
+      "ownership_type": null,
+      "industry_categories": "SERVICES-DIGITAL",
+      "area_code": null,
+      "calling_code": "+234",
+      "form_three_evidence_path": null,
+      "settlement_account_type": "bank_account",
+      "international_requested": true,
+      "compliance_documents_submitted": true,
+      "incorporated_before_2017": 0,
+      "has_refreshed_incorporation_documents": true,
+      "process_amex_cards": false,
+      "is_terminal_integration": false,
+      "createdAt": "2020-01-03T23:03:19.000Z",
+      "updatedAt": "2021-11-12T19:43:21.000Z"
+    },
+    "terminal_integration_attribute": null,
+    "is_terminal_active": false,
+    "is_registration_type_supported_for_terminal": false,
+    "office_address": {
+      "id": 161912,
+      "street_line_one": "Phase 4, Kubwa, Abuja",
+      "street_line_two": null,
+      "post_code": null,
+      "model": "integration",
+      "model_row": 405659,
+      "city": "Kubwa",
+      "state": "Federal Capital Territory",
+      "country": "Nigeria",
+      "type": "office"
+    },
+    "registered_address": {
+      "id": 161911,
+      "street_line_one": "Phase 4, Kubwa, Abuja",
+      "street_line_two": null,
+      "post_code": null,
+      "model": "integration",
+      "model_row": 405659,
+      "city": "Kubwa",
+      "state": "Federal Capital Territory",
+      "country": "Nigeria",
+      "type": "registered"
+    },
+    "available_channels": [
+      "bank",
+      "card",
+      "qr",
+      "ussd",
+      "bank_transfer",
+      "payattitude"
+    ],
+    "payouts_on_hold_reason": null,
+    "logged_in_user_role": {
+      "id": 34,
+      "name": "admin",
+      "description": "This role grants users the permissions to manage everything on the dashboard"
+    }
+  }
+}

@@ -64,6 +64,18 @@ return [
 	'wallets_africa_secret_key' => env('WALLETS_AFRICA_SECRET_KEY', 'hfucj5jatq8h'),
 	'wallets_africa_base_uri' => env('WALLETS_AFRICA_BASE_URI', 'https://sandbox.wallets.africa'),
 
+	/*
+    |--------------------------------------------------------------------------
+    | Paystack API Params
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+	'paystack_public_key' => env('PAYSTACK_PUBLIC_KEY', 'pk_test_305cb5b5787b3adfe45ca9d51b643344a2174c9e'),
+	'paystack_secret_key' => env('PAYSTACK_SECRET_KEY', 'sk_test_b4b0c6565206c58176dcabf4adb86bdcc8268ac0'),
+	'paystack_base_uri' => env('PAYSTACK_BASE_URI', 'https://api.paystack.co'),
+
 
 
 

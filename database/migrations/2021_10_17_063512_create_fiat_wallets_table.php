@@ -21,7 +21,7 @@ class CreateFiatWalletsTable extends Migration
 			$table->string('bank')->nullable();
 			$table->string('accountName')->nullable();
 			$table->string('currency')->nullable();
-			$table->decimal('balance', 10, 2)->nullable();
+			$table->integer('balance')->nullable();
 			$table->timestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

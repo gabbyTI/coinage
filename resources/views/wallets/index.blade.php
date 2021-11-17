@@ -480,6 +480,7 @@
 		event.preventDefault();
 		var transaction_reference = 'D' + Math.floor(100000000000000 + Math.random() * 900000000000000);
 		var d_amount = calculateAmountAndFee($('#deposit-amount').val());
+		var base_url = {!! json_encode(URL::to('/')) !!};
 		$('#depositModal').modal('hide');
 		var handler = PaystackPop.setup({
 			key: 'pk_test_305cb5b5787b3adfe45ca9d51b643344a2174c9e', // Replace with your public key
@@ -495,7 +496,7 @@
 			currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
 			callback: function (response) {
 				$.ajax({
-					url: 'http://coinage.test/paystack/verify_transaction?reference=' + response
+					url: base_url + '/paystack/verify_transaction?reference=' + response
 						.reference,
 					method: 'get',
 					complete: function (response) {
@@ -510,7 +511,7 @@
 			onClose: function () {
 				alert('Transaction was not completed, window closed. '+ transaction_reference);
 				$.ajax({
-					url: 'http://coinage.test/paystack/verify_transaction?reference=' + transaction_reference,
+					url: base_url + '/paystack/verify_transaction?reference=' + transaction_reference,
 					method: 'get',
 					complete: function (response) {
 						$('#response-message').text(response.responseJSON.message);

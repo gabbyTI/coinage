@@ -15,6 +15,7 @@ class Transaction extends Model
 		'type',
 		'reference',
 		'withdrawal_amount',
+		'paid_amount',
 		'deposit_amount',
 		'buy_amonut',
 		'buy_amount_crypto',

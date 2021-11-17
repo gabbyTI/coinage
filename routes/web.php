@@ -84,5 +84,5 @@ Route::middleware(['auth', 'verified', 'password.confirm'])->group(function () {
 
 	//Paystack
 	Route::get('/paystack/verify_transaction', [TransactionController::class, 'deposit']);
-	Route::post('/paystack/verify', [PaystackController::class, 'testTwo']);
+	// Route::post('/paystack/verify', [PaystackController::class, 'testTwo']);
 });

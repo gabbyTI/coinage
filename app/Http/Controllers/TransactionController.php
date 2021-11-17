@@ -43,10 +43,17 @@ class TransactionController extends Controller
 		$transactionReference = $paystack['reference'];
 
 		$userOldWalletBalanceInKobo = auth()->user()->getfiatWalletBalance('ngn');
-
 		$paystackFeeInKobo = $paystack['fees'];
-		$coinageFeeInKobo = (0.5 * $paystackFeeInKobo);
-		$TotalFeeInKobo = ($coinageFeeInKobo + $paystackFeeInKobo);
+		$requestedAmountInKobo = $paystack['metadata']['requested_amount'];
+		$amountPaidInKobo = $paystack['amount'];
+
+		$coinageFeeInKobo = ($amountPaidInKobo - $paystackFeeInKobo) - $requestedAmountInKobo;
+		$totalFeeInKobo = $amountPaidInKobo - $requestedAmountInKobo;
+
+		// return $coinageFeeInKobo;
+		// $paystackFeeInKobo = $paystack['fees'];
+		// $coinageFeeInKobo = (0.5 * $paystackFeeInKobo);
+		// $totalFeeInKobo = ($coinageFeeInKobo + $paystackFeeInKobo);
 
 		$transaction = Transaction::where('reference', $transactionReference)->first();
 
@@ -59,7 +66,7 @@ class TransactionController extends Controller
 				$transaction->update([
 					'paystack_fee' => $paystackFeeInKobo,
 					'coinage_fee' => $coinageFeeInKobo,
-					'total_fee' => $TotalFeeInKobo,
+					'total_fee' => $totalFeeInKobo,
 					'paystack_status' => $paystack['status'],
 					'ip_address' => $paystack['ip_address'],
 					'old_balance' => $userOldWalletBalanceInKobo,
@@ -74,8 +81,7 @@ class TransactionController extends Controller
 				}
 
 				// credit wallet
-				$amountToDepositInKobo = ($paystack['amount'] - $TotalFeeInKobo);
-				$newWalletBalanceInKobo = ($userOldWalletBalanceInKobo + $amountToDepositInKobo);
+				$newWalletBalanceInKobo = ($userOldWalletBalanceInKobo + $requestedAmountInKobo);
 				$fiatWallet = auth()->user()->fiatWallets->where('currency', 'ngn')->first();
 				$fiatWallet->update([
 					'balance' => $newWalletBalanceInKobo
@@ -95,12 +101,13 @@ class TransactionController extends Controller
 			'user_id' => $paystack['metadata']['user_id'],
 			'type' => 'deposit',
 			'reference' => $transactionReference,
-			'deposit_amount' => $paystack['amount'],
+			'deposit_amount' => $requestedAmountInKobo,
+			'paid_amount' => $paystack['amount'],
 			'logdate' => Carbon::now(),
 			'paystack_transaction_id' => $paystack['id'],
 			'paystack_fee' => $paystackFeeInKobo,
 			'coinage_fee' => $coinageFeeInKobo,
-			'total_fee' => $TotalFeeInKobo,
+			'total_fee' => $totalFeeInKobo,
 			'paystack_status' => $paystack['status'],
 			'ip_address' => $paystack['ip_address'],
 			'old_balance' => $userOldWalletBalanceInKobo,
@@ -115,8 +122,7 @@ class TransactionController extends Controller
 		}
 
 		// credit wallet
-		$amountToDepositInKobo = ($paystack['amount'] - $TotalFeeInKobo);
-		$newWalletBalanceInKobo = ($userOldWalletBalanceInKobo + $amountToDepositInKobo);
+		$newWalletBalanceInKobo = ($userOldWalletBalanceInKobo + $requestedAmountInKobo);
 		$fiatWallet = auth()->user()->fiatWallets->where('currency', 'ngn')->first();
 		$fiatWallet->update([
 			'balance' => $newWalletBalanceInKobo

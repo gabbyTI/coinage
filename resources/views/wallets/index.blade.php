@@ -414,7 +414,7 @@
 
 								<form id="getDepositAmountForm">
 									<div class="form-group">
-										<input type="tel" class="form-control fs-15px bg-white mb-1" id="deposit-amount"
+										<input type="number" class="form-control fs-15px bg-white mb-1" id="deposit-amount"
 											placeholder="Enter Deposit Amount" required />
 									</div>
 									<div class="form-submit text-center">
@@ -479,15 +479,18 @@
 	function payWithPaystack(event) {
 		event.preventDefault();
 		var transaction_reference = 'D' + Math.floor(100000000000000 + Math.random() * 900000000000000);
+		var d_amount = calculateAmountAndFee($('#deposit-amount').val());
 		$('#depositModal').modal('hide');
 		var handler = PaystackPop.setup({
 			key: 'pk_test_305cb5b5787b3adfe45ca9d51b643344a2174c9e', // Replace with your public key
 			email: document.getElementById('email-address').value,
-			amount: (document.getElementById('amount').value * 100) + (document.getElementById('transaction-fee').value * 100), // the amount value is multiplied by 100 to convert to the lowest currency unit
+			// amount: (document.getElementById('amount').value * 100) + (document.getElementById('transaction-fee').value * 100), // the amount value is multiplied by 100 to convert to the lowest currency unit
+			amount: d_amount * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
 			channels: ['card'],
 			ref: transaction_reference,
 			metadata: {
-				'user_id': '{{Auth::user()->id}}'
+				'user_id': '{{Auth::user()->id}}',
+				'requested_amount': $('#deposit-amount').val() * 100
 			},
 			currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
 			callback: function (response) {
@@ -523,15 +526,9 @@
 
 	function proceedToPay(event){
 		event.preventDefault();
-		// calculate paystack fee
-		var amount = document.getElementById('deposit-amount').value;
-		var paystackFee = calculatePaystackFee(amount);
-		console.log('paystack fee: '+ paystackFee);
-		// calculate coinage fee
-		var coinageFee = paystackFee * 0.5;
-		console.log('coinage fee: '+ coinageFee);
+		var amount = $('#deposit-amount').val();
 		// calculate total fee
-		var totalFee = paystackFee + coinageFee;
+		var totalFee = calculateFee(amount);
 		console.log('total fee: '+ totalFee);
 		// close showAccountModal
 		$('#showAccountModal').modal('hide');
@@ -543,19 +540,62 @@
 
 	}
 
-	function calculatePaystackFee(amount){
-		let fee = 0;
-		if(amount < 2500){
-			fee = 0.015 * amount;
+	function calculateAmountAndFee(amount){
+		let price = parseInt(amount);
+		let final_amt;
+		var decimal_fee = (0.3 * 0.015) + 0.015;
+		console.log('decimal_fee = '+ (1-decimal_fee));
+		let paystackAppfee;
+		if (price < 2500){
+			// if the amount is les than 2500 then the appfee can never be greater than 2000, so just return the final amount
+			final_amt = Math.round(( price / (1 - decimal_fee) ) + 0.01);
+			console.log('amt when price less than 2500 = ' + final_amt);
+			return final_amt;
 		}else{
-			fee = (0.015 * amount) + 100;
+			// when the price is greater than 2500, then there will be a flat fee of N100 added to every fee amount
+			paystackAppfee = Math.round(0.015 * $('#deposit-amount').val()) + 100;
+			console.log('paystack app fee = ' + paystackAppfee);
+			// now check if the paystack fee is greater than the fee cap of 2000
+			if(paystackAppfee > 2000){
+				// if it is greater than 2000 the return the amount
+				final_amt = price + (2000 + (0.3 * 2000));
+				console.log('final amount when paystack fee exceeds fee cap = ' + final_amt );
+				return final_amt;
+			}else{
+				final_amt = Math.round(((price + 100) / (1 - decimal_fee)) + 0.01);
+				console.log('final amount when paystack fee is lower than fee cap = ' + final_amt );
+				return final_amt;
+			}
 		}
+	}
 
-		if(fee > 2000){
-			fee = 2000;
+	function calculateFee(amount){
+		let price = parseInt(amount);
+		let final_amt;
+		var decimal_fee = (0.3 * 0.015) + 0.015;
+		console.log('decimal_fee = '+ (1-decimal_fee));
+		let paystackAppfee;
+		if (price < 2500){
+			// if the amount is les than 2500 then the appfee can never be greater than 2000, so just return the final amount
+			final_amt = Math.floor(( price / (1 - decimal_fee) ) + 0.01);
+			console.log('amt when price less than 2500 = ' + final_amt);
+			return final_amt - price;
+		}else{
+			// when the price is greater than 2500, then there will be a flat fee of N100 added to every fee amount
+			paystackAppfee = Math.round(0.015 * $('#deposit-amount').val()) + 100;
+			console.log('paystack app fee = ' + paystackAppfee);
+			// now check if the paystack fee is greater than the fee cap of 2000
+			if(paystackAppfee > 2000){
+				// if it is greater than 2000 the return the amount
+				final_amt = price + (2000 + (0.3 * 2000));
+				console.log('final amount when paystack fee exceeds fee cap = ' + final_amt );
+				return final_amt - price;
+			}else{
+				final_amt = Math.round(((price + 100) / (1 - decimal_fee)) + 0.01);
+				console.log('final amount when paystack fee is lower than fee cap = ' + final_amt );
+				return final_amt - price;
+			}
 		}
-
-		return fee;
 	}
 
 </script>

@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
 			$table->string('type');
 			$table->string('reference');
 			$table->integer('withdrawal_amount')->nullable();
+			$table->integer('paid_amount')->nullable();
 			$table->integer('deposit_amount')->nullable();
 			$table->integer('buy_amonut')->nullable();
 			$table->string('buy_amount_crypto')->nullable();
